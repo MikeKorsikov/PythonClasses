@@ -1,6 +1,7 @@
-# list [] editable, not unique
-
-# tuple () not editable
+# list [] editable, sortable, can contain duplicates
+# tuple () NOT editable, sortable, can contain duplicates
+# set {} editable, NOT sortable, unique
+# dictionary {x:y}
 
 t = (4, 5, 6)
 
