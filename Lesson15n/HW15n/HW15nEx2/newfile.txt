@@ -1,0 +1,5 @@
+Number of symbols: 14 
+Number of rows: 3 
+Number of vowels: 2 
+Number of consonants: 6
+Number of digits: 4
