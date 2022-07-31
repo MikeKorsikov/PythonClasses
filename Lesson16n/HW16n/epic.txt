@@ -1,0 +1,33 @@
+Functional requirements:
+
+1. Create new entry x
+2. Edit record x
+3. Remove record x
+4. Search record  (by various keys just like update) x
+5. Display all records which share the same parameter (e.g. first latter of surname)
+
+Non-functional:
+1. Save found record in separate file x
+2. Store records in separate file x
+3. Enable saving via command x
+4. Enable automatic saving on exit x
+5. Load list of records from specified file x
+
+
+
+Напишите информационную систему «Сотрудники».
+Программа должна обеспечивать
+ввод данных,
+редактирование данных сотрудника,
+удаление сотрудника,
+поиск сотрудника по фамилии,
+вывод информации обо всех сотрудниках, указанного возраста, или фамилия которых
+начинается на указанную букву.
+
+Организуйте возможность
+сохранения найденной информации в файл.
+Также весь список сотрудников сохраняется в файл
+(при выходе из программы — автоматически, в процессе исполнения
+программы — по команде пользователя).
+При старте программы происходит загрузка списка сотрудников из
+указанного пользователем файла.
