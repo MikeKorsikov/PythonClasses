@@ -5,12 +5,12 @@ response = requests.get("https://rickandmortyapi.com/api/character")
 
 j = response.json()
 names = []
+characters = {}
+# characters = []
 
 for character in j['results']:
-    names.append(character['name'])
-print(*names)
-
-print((type(response.text)))
-
-# post
-
+    name = character['name']
+    status = character['status']
+    match name, status:
+        case _, "Dead":
+            print(name)
