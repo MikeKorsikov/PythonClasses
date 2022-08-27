@@ -59,7 +59,7 @@ class Dog:
     def get_code(self):
         return self.__code
 
-    def set_code(self, __code):
+    def set_code(self, code):
         self.__code = code
 
     # private function
