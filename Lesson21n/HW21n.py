@@ -1,4 +1,6 @@
 print('Exercise - Fraction Class:\n')
+
+
 class Fraction:
     def __init__(self, numerator=0, denominator=0):
         self.numerator = numerator
@@ -6,7 +8,7 @@ class Fraction:
 
     # returning fraction x/y without being called
     def __str__(self):
-        return str(self.numerator)+'/'+str(self.denominator)
+        return str(self.numerator) + '/' + str(self.denominator)
 
     def show_fraction(self):
         print(f'{self.numerator}/{self.denominator}')
@@ -26,14 +28,14 @@ class Fraction:
         return new_denominator
 
     def add_fractions(self, fraction2):
-        result_numerator = self.numerator*fraction2.denominator + self.denominator*fraction2.numerator
-        result_denominator = self.denominator*fraction2.denominator
+        result_numerator = self.numerator * fraction2.denominator + self.denominator * fraction2.numerator
+        result_denominator = self.denominator * fraction2.denominator
         result = f'{result_numerator}/{result_denominator}'
         return result
 
     def multiply_fractions(self, fraction2):
-        result_numerator = self.numerator*fraction2.numerator
-        result_denominator = self.denominator*fraction2.denominator
+        result_numerator = self.numerator * fraction2.numerator
+        result_denominator = self.denominator * fraction2.denominator
         result = f'{result_numerator}/{result_denominator}'
         return result
 
@@ -91,3 +93,7 @@ example5 = Fraction(1, 15)
 print(f'{example4} * {example5} =')
 example6 = Fraction.multiply_fractions(example4, example5)
 print(example6)
+
+# getting parameters from object
+print(example5.numerator)
+print(example5.denominator)
