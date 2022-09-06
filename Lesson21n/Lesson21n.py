@@ -1,4 +1,4 @@
-# classes
+# classes part-1
 
 # creating class (simple)
 class Person:
