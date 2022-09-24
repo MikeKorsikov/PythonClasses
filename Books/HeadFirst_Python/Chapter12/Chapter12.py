@@ -4,7 +4,7 @@
 print('\nReading raw CSV data from the file:')
 import os
 
-os.chdir('/Users/mykolakorsikov/PycharmProjects/Python/HeadFirst_Python/Chapter12')
+os.chdir('/Books/HeadFirst_Python/Chapter12')
 
 with open('buzzers.csv') as raw_data:
     print(raw_data.read())
