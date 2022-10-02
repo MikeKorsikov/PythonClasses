@@ -1,0 +1,9 @@
+{
+    "Name": "Mykola",
+    "Exams": {
+        "Math": 100,
+        "CS": 100
+    },
+    "age": 20,
+    "alive": true
+}

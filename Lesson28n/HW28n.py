@@ -69,7 +69,7 @@ class DoubleLinkedList:
     def iter(self):
         current = self.head
         while current:
-            val = current.data
+            val = current.login
             current = current.next
             yield val
 
