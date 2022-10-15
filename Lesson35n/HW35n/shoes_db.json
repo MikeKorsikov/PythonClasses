@@ -1,0 +1,18 @@
+{
+  "0": {
+    "gender": "m",
+    "category": "boots",
+    "color": "black",
+    "price": 100,
+    "producer": "ukrainske vzuttya",
+    "size": 43
+  },
+    "1": {
+    "gender": "f",
+    "category": "sneakers",
+    "color": "red",
+    "price": 100,
+    "producer": "Nike",
+    "size": 36
+  }
+}
