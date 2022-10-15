@@ -1,18 +1,26 @@
 {
-  "0": {
+  "1": {
     "gender": "m",
-    "category": "boots",
+    "category": "brogues",
     "color": "black",
-    "price": 100,
-    "producer": "ukrainske vzuttya",
-    "size": 43
+    "price": 200.58,
+    "producer": "Ukrainske vzuttya",
+    "size": 44
   },
-    "1": {
+  "2": {
     "gender": "f",
-    "category": "sneakers",
+    "category": "high heels",
     "color": "red",
-    "price": 100,
-    "producer": "Nike",
+    "price": 299.45,
+    "producer": "Ukrainske vzuttya",
     "size": 36
+  },
+  "3": {
+    "gender": "m",
+    "category": "sneakers",
+    "color": "white",
+    "price": 199.99,
+    "producer": "Nike",
+    "size": 44
   }
 }

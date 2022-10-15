@@ -5,6 +5,7 @@
 import Model
 
 def index():
+    Model.retrieve_data()
     print('\n\tHome page'
           '\n[1] Display all stock'
           '\n[2] Find stock'
@@ -14,19 +15,22 @@ def index():
 
 def display_page():
     print('\n\tAll items:')
-    stock = Model.retrieve_data()
-    for SKU in stock:
+    for SKU in Model.stock:
         print(SKU)
+
+    Model.go_on()
 
 
 def search_page():
     print('\n\tSearch page')
     Model.find_stock()
+    Model.go_on()
 
 
 def add_shoes_page():
     print('\n\tAdding SKU page')
-    # series of questions
+    Model.add_stock()
+    Model.go_on()
 
 
 def terminate_session_page():
