@@ -4,8 +4,8 @@
 
 import Model
 
+
 def index():
-    Model.retrieve_data()
     print('\n\tHome page'
           '\n[1] Display all stock'
           '\n[2] Find stock'

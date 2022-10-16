@@ -3,21 +3,24 @@
 # It delegates data handling to Model
 
 
-import View
+import View, Model
 
 
 def main():
-    View.index()
-    answer = int(input('>>> '))
-    match answer:
-        case 1:
-            View.display_page()
-        case 2:
-            View.search_page()
-        case 3:
-            View.add_shoes_page()
-        case 4:
-            View.terminate_session_page()
+    Model.retrieve_data()
+    answer = 0
+    while answer != 4:
+        View.index()
+        answer = int(input('>>> '))
+        match answer:
+            case 1:
+                View.display_page()
+            case 2:
+                View.search_page()
+            case 3:
+                View.add_shoes_page()
+            case 4:
+                View.terminate_session_page()
 
 
 if __name__ == '__main__':

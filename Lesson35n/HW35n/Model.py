@@ -150,7 +150,6 @@ def add_stock():
                        size_assigned)
 
     stock.append(SKU_object)
-
     save_data()
 
 
@@ -158,7 +157,7 @@ def go_on():
     print('\nDo you want to continue? [Y/N]')
     selection = str(input('>>>')).lower()
     if selection == 'n':
-        print('Session terminated.')
+        print('\n\tSession terminated.')
         exit()
     else:
         pass
