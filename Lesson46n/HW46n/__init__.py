@@ -60,15 +60,15 @@ def connect_db():
     global my_db, my_cursor
     print("\n\t[1] Connect to DB")
     try:
-        # host_given = str(input("Enter host IP to db: "))
-        # user_given = str(input("Enter user login to db: "))
-        # password_given = str(input("Enter password to db: "))
+        host_given = str(input("Enter host IP to db: "))
+        user_given = str(input("Enter user login to db: "))
+        password_given = str(input("Enter password to db: "))
         database_given = str(input("Enter DB name to connect to: "))
 
         my_db = connect(
-            host='127.0.0.1',  # '127.0.0.1'
-            user='root',  # root
-            password='2020Gsk+my')  # '2020Gsk+my'
+            host=host_given,  # '127.0.0.1'
+            user=user_given,  # root
+            password=password_given)
 
         my_cursor = my_db.cursor(buffered=True)
         my_cursor.execute(f"USE {database_given};")
