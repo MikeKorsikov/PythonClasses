@@ -3,11 +3,13 @@
 from mysql.connector import connect
 import sys
 import time
+import csv
 
 # global variables
 selected_table = ""
 dict_of_columns = {}
 dict_of_tables = {}
+dict_of_reports = {}
 updated_record = {}
 
 
@@ -56,7 +58,7 @@ def menu():
 # Submenu 1
 def connect_db():
     global my_db, my_cursor
-    print("\n\t[1] Connect to DB:")
+    print("\n\t[1] Connect to DB")
     try:
         # host_given = str(input("Enter host IP to db: "))
         # user_given = str(input("Enter user login to db: "))
@@ -83,7 +85,7 @@ def connect_db():
 
 # Submenu 2
 def show_tables():
-    print("\n\t[2] Show available tables:")
+    print("\n\t[2] Show available tables")
     try:
         if test_connection():
             extract_tables()
@@ -96,7 +98,7 @@ def show_tables():
 
 # Submenu 3
 def add_new_record():
-    print("\n\t[3] Add new record:")
+    print("\n\t[3] Add new record")
     global selected_table
     try:
         if test_connection():
@@ -152,7 +154,7 @@ def add_new_record():
 
 # Submenu 4
 def update_record():
-    print("\n\t[4] Update existing record:")
+    print("\n\t[4] Update existing record")
     try:
         global updated_record
         global selected_table
@@ -215,7 +217,7 @@ def update_record():
 
 # Submenu 5
 def delete_record():
-    print("\n\t[5] Delete record:")
+    print("\n\t[5] Delete record")
     try:
         global selected_table
         if test_connection():
@@ -255,11 +257,62 @@ def delete_record():
 
 # Submenu 6
 def generate_report():
-    print("\n\t[6] Generate report:")
+    print("\n\t[6] Generate report")
     try:
-        # todo add submenu with list of available reports
-        # todo add pop up asking if want to save result to separate file (txt, csv etc)
-        go_on()
+        global dict_of_reports
+        global dict_of_columns
+        list_of_column_names = []
+        if test_connection():
+            print("\n\tList of available reports:"
+                  "\n[1] Information about all groups"
+                  "\n[2] Information about all teachers"
+                  "\n[3] List of departments"
+                  "\n[4] Teachers per group"
+                  "\n[5] List of groups per department"
+                  "\n[6] Department with maximum number of groups"
+                  "\n[7] Department with smallest number of groups"
+                  "\n[8] List of subjects per teacher")
+
+            report_selected = int(input(">>> "))
+
+            dict_of_reports = {
+                1: f"SELECT * FROM `Groups`;",
+                2: f"SELECT * FROM `Teachers`",
+                3: "",
+                4: "",
+                5: "",
+                6: "",
+                7: "",
+                8: "",
+            }
+
+            report_statement = dict_of_reports[report_selected]
+            my_cursor.execute(report_statement)
+            extracted_report = my_cursor.fetchall()
+            print(f"CHECH - report: {extracted_report}")
+
+            # extract columns
+            field_names = [i[0] for i in my_cursor.description]
+            print(f"CHECK - columns: {tuple(field_names)}")
+
+            time.sleep(2)
+
+            print("\nReport:")
+            for record in extracted_report:
+                print(str(record))
+
+            choice = str(input("\nDo you want to save report? [Y/N]"
+                               "\n>>> ")).lower()
+            if choice == 'y':
+                file = open("report_results.txt", "w+")
+                file.write(f"{str(tuple(field_names))}\n")
+                for row in extracted_report:
+                    file.write(f"{str(row)}\n")
+                file.close()
+
+            else:
+                go_on()
+
     except Exception as e:
         print(f"[6] Error: {e}")
 
