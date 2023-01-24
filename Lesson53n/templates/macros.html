@@ -1,0 +1,20 @@
+{% macro listOfPersons(ls) %}
+    <div class="d1">
+        {% for item in ls %}
+            <div class="person-container">
+                <p>#: {{ loop.index }}</p>
+                <span>Name: {{ item.name|safe }}</span>
+                <p>Age: {{ item.age|int }}</p>
+                {% if item.position %}
+                    <p>Position: {{ item.position }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro mess(m) %}
+    <p>{{ m }}</p>
+    <p>varargs: {{ varargs }}</p>
+    <p>kwargs: {{ kwargs }}</p>
+{% endmacro %}

@@ -1,0 +1,43 @@
+body {
+    margin: 0;
+    height: 1200px;
+}
+
+.d1 {
+    background-color: cornflowerblue;
+    color: blanchedalmond;
+    height: 200px;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    margin: 20px auto;
+    border-radius: 12px;
+}
+
+.person-container {
+    background-color: rgb(44, 64, 102);
+    width: 200px;
+    max-height: 120px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+ul {
+    background-color: darkgray;
+    padding: 25px;
+    margin: 0;
+}
+
+li {
+    display: inline;
+    font-size: large;
+    margin-right: 50px;
+}
+
+.int-l{
+    background-color: red;
+}

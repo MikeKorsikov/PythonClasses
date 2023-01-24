@@ -1,0 +1,29 @@
+
+{% extends "index.html" %}
+
+{% block nav %}
+    {{ super() }}
+{% endblock %}
+
+{% block main %}
+{% if user_present %}
+<p>It's your {{ user_present }}</p>
+{% endif %}
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+    <form method="post">
+        {{ form.csrf_token }}        
+        <div>
+            {{ form.login.label }} {{ form.login(class_ = "int-l") }}
+        </div>
+        <div>
+            {{ form.password.label }} {{ form.password(placeholder='test') }}
+
+        </div>
+        <div>
+            <button type="submit">Enter</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+  </head>
+  <body>
+  <img class="phonepic" src="static/phone.png" alt="phone" />
+  <p class="main_title">Digital Phonebook</p>
+  <a href="/">Home</a>
+  <a href="/listing">View Phonebook</a>
+  <a href="/new_entry">Add Entry</a>
+  <!-- <a href="/edit_entry">Update Entry</a> -->
+    {% block body %}
+      <h1 class="title">{{title}}</h1>
+          <h2>Welcome to Digital Phonebook!</h2>
+    {% endblock %}
+  </body>
+</html>
