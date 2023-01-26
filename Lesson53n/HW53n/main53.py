@@ -3,6 +3,7 @@
 from flask import Flask, render_template, g, request, flash, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from wtforms.validators import InputRequired, DataRequired, Length
 import sqlite3
 import os
 
@@ -11,8 +12,14 @@ app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 
 class NewRecordForm(FlaskForm):
-    name = StringField("Name")
-    phone = StringField("Phone")
+    name = StringField("Name", validators=[InputRequired("Input is required"),
+                                           DataRequired("Data is required"),
+                                           Length(min=5, max=20,
+                                                  message="Input must be between 5 and 20 characters long")])
+    phone = StringField("Phone", validators=[InputRequired("Input is required"),
+                                             DataRequired("Data is required"),
+                                             Length(min=6, max=15,
+                                                    message="Input must be between 6 and 15 characters long")])
     submit = SubmitField("Submit")
 
 
@@ -29,10 +36,22 @@ def main():
 
 @app.route("/all")
 def show_all():
-    # todo add query to DB
+    conn = get_db()
+    c = conn.cursor()
+    records_from_db = c.execute("SELECT c.id, c.name, c.phone FROM contacts AS c")
+
+    records = []
+    for row in records_from_db:
+        record = {
+            "id": row[0],
+            "name": row[1],
+            "phone": row[2]
+        }
+        records.append(record)
     # todo add display retrieved data [display()?]
-    pass
-    return render_template("all.html", title="All records")
+    print(records)
+
+    return render_template("all.html", title="All records", records=records)
 
 
 @app.route("/new", methods=['GET', 'POST'])
@@ -54,12 +73,8 @@ def new_record():
         flash("Record {} has been successfully submitted".format(request.form.get("name")), "success")
         return redirect(url_for("main"))
     return render_template("new.html", form=form)
-
-    # todo use form
-    # todo use class
-    # todo save to DB [submit button]
     # todo display what was saved  [display()?]
-    pass
+
     return render_template("new.html", title="New record")
 
 

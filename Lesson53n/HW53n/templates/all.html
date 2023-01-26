@@ -1,14 +1,44 @@
 {% extends 'base.html' %}
 {% set active_page = 'all' %}
+{% block title %} All records - {% endblock %}
 
 {% block content %}
 <div class="row">
     <div class="col-lg-3">
         <div class="my-4">
             <h1>All records</h1>
+        </div>
+    </div>
 
+    <div class="col-lg-9">
+        <div class="row my-5 card-wrapper">
+            {% if records %}
+            {% for record in records %}
+
+            <!-- iterating contacts from database -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <a href="#">
+                            <img class="card-img-top embed-responsive-item"
+                                src="{{ url_for('static', filename='images/contact_icon.png') }}">
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h5>
+                            <a href="#">{{ record.name }}</a>
+                        </h5>
+                        <h6>{{ record.phone }}</h6>
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <h1 class="offset-lg-3">No contacts to show.</h1>
+            {% endif %}
         </div>
     </div>
 </div>
-
 {% endblock %}
