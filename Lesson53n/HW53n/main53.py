@@ -11,7 +11,7 @@ app = Flask("Phonebook", template_folder="templates")
 app.config['SECRET_KEY'] = os.urandom(12).hex()
 
 
-class NewRecordForm(FlaskForm):
+class RecordForm(FlaskForm):
     name = StringField("Name", validators=[InputRequired("Input is required"),
                                            DataRequired("Data is required"),
                                            Length(min=5, max=20,
@@ -20,7 +20,18 @@ class NewRecordForm(FlaskForm):
                                              DataRequired("Data is required"),
                                              Length(min=6, max=15,
                                                     message="Input must be between 6 and 15 characters long")])
+
+
+class NewRecordForm(RecordForm):
     submit = SubmitField("Submit")
+
+
+class EditRecordForm(RecordForm):
+    submit = SubmitField("Update record")
+
+
+class DeleteRecordForm(RecordForm):
+    submit = SubmitField("Delete record")
 
 
 @app.route("/")
@@ -48,7 +59,6 @@ def show_all():
             "phone": row[2]
         }
         records.append(record)
-    # todo add display retrieved data [display()?]
     print(records)
 
     return render_template("all.html", title="All records", records=records)
@@ -78,15 +88,67 @@ def new_record():
     return render_template("new.html", title="New record")
 
 
-@app.route("/edit", methods=['GET', 'POST'])
-def edit_record():
-    # todo add search record [use search_record()]
-    # todo display found record [display()?]
-    # todo add new details
-    # todo save record to DB [submit button]
-    # todo add exception if record not found
-    pass
-    return render_template("edit.html", title="Edit record")
+@app.route("/record/<int:record_id>/edit", methods=['GET', 'POST'])
+def edit_record(record_id):
+    conn = get_db()
+    c = conn.cursor()
+    record_from_db = c.execute("SELECT * FROM contacts WHERE id = ?", (record_id,))
+    row = c.fetchone()
+    try:
+        record = {
+            "id": row[0],
+            "name": row[1],
+            "phone": row[2]
+        }
+    except:
+        record = {}
+
+    if record:
+        form = EditRecordForm()
+        if form.validate_on_submit():
+            c.execute("UPDATE contacts SET name = ?, phone = ? WHERE id = ?",
+                      (
+                          form.name.data,
+                          form.phone.data,
+                          record_id
+                      )
+                      )
+            conn.commit()
+
+            flash("Record {} has been successfully updated".format(form.name.data), "success")
+            return redirect(url_for("record", record_id=record_id))
+
+        form.name.data = record["name"]
+        form.phone.data = record["phone"]
+
+        if form.errors:
+            flash("{}".format(form.errors), "danger")
+        return render_template("edit.html", record=record, form=form)
+    return redirect(url_for("main"))
+
+
+@app.route("/record/<int:record_id>")
+def record(record_id):
+    c = get_db().cursor()
+    record_from_db = c.execute("""SELECT  c.id, c.name, c.phone 
+    FROM contacts AS c WHERE c.id = ?""", (record_id,))
+    row = c.fetchone()
+
+    try:
+        record = {
+            "id": row[0],
+            "name": row[1],
+            "phone": row[2]
+        }
+
+    except:
+        record = {}
+
+    if record:
+        deleteRecordForm = DeleteRecordForm()
+
+        return render_template("record.html", record=record, deleteRecordForm=deleteRecordForm)
+    return redirect(url_for("main"))
 
 
 @app.route("/search")
@@ -99,13 +161,30 @@ def search_record():
     return render_template("search.html", title="Search record")
 
 
-@app.route("/delete", methods=['GET', 'POST'])
-def delete_record():
-    # todo add search record [use search_record()]
-    # todo display record found [display()?]
-    # todo save to DB [submit button]
-    pass
-    return render_template("delete.html", title="Delete record")
+@app.route("/record/<int:record_id>/delete", methods=["POST"])
+def delete_record(record_id):
+    conn = get_db()
+    c = conn.cursor()
+
+    record_from_db = c.execute("SELECT * FROM contacts WHERE id = ?", (record_id,))
+    row = c.fetchone()
+    try:
+        record = {
+            "id": row[0],
+            "name": row[1]
+        }
+    except:
+        record = {}
+
+    if record:
+        c.execute("DELETE FROM contacts WHERE id = ?", (record_id,))
+        conn.commit()
+
+        flash("Record {} has been successfully deleted.".format(record["name"]), "success")
+    else:
+        flash("This record does not exist.", "danger")
+
+    return redirect(url_for("main"))
 
 
 @app.errorhandler(404)
@@ -118,6 +197,13 @@ def get_db():
     if db is None:
         db = g._database = sqlite3.connect('db/phonebook.db')
     return db
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, "_database", None)
+    if db is not None:
+        db.close()
 
 
 if __name__ == "__main__":
