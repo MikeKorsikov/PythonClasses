@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h1>Main page</h1>
+    <br>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contacts' %}">Contacts</a></li>
+                <li><a href="{% url 'management' %}">Management</a></li>
+                <li><a href="{% url 'news' %}">News</a></li>
+            </ul>
+
+        </nav>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

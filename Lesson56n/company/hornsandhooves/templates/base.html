@@ -1,0 +1,49 @@
+{% load static %}
+
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home - Horns and Hooves</title>
+        <link rel="stylesheet" id="ample-style-css" href="{% static 'style.css' %}" type="text/css" media="all">
+    </head>
+    <body class="wide">
+        <div id="page" class="hfeed site">
+            <header>
+                <div class="header">
+                    <div class="main-head-wrap inner-wrap clearfix">
+                        <div id="header-logo-image">
+                            <a href="/">
+                                <img src="{% static 'images/logo.jpeg' %}" alt="Horns and Hooves shit company">
+                            </a>
+                        </div>
+                        <div id="header-text" class="">
+                            <h1 id="site-title">
+                                <a href="/" title="Horns and Hooves shit comapny" rel="home">Horns and Hooves</a>
+                            </h1>
+                            <p>We are professional crooks to cheat you!</p>
+                        </div>
+                    </div>
+                    <img src="{% static 'images/header.png' %}" alt="Horns and Hooves header">
+                </div>
+            </header>
+            <div class="main-wrapper">
+                <div class="single-page clearfix">
+                    <div class="inner-wrap">
+                        <p>Let me show you what great scum looks like!</p>
+                        <hr>
+                        <div>
+                            {% block content %}
+                            {% endblock %}                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer id="colophon">
+                <div class="inner-wrap">
+                    Horns and Hooves does not assume any responsibility for loss of your funds.
+                </div>
+            </footer>
+        </div>
+        <script src="{% static 'main.js' %}"></script>
+    </body>
+</html>
