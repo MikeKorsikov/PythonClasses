@@ -1,0 +1,32 @@
+{% load static %}
+
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <title>Time</title>
+        <link rel="stylesheet" id="ample-style-css" href="{% static 'style.css' %}" type="text/css" media="all">
+    </head>
+    <body class="wide">
+        <div id="page" class="hfeed site">
+            <header>
+                <div class="header">
+                    <div class="main-head-wrap inner-wrap clearfix">
+
+                    </div>
+                    <img src="{% static 'images/time.jpeg' %}" alt="Johnsonyuk">
+                </div>
+            </header>
+            <div class="main-wrapper">
+                <div class="single-page clearfix">
+                    <div class="inner-wrap">
+                        <div>
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
